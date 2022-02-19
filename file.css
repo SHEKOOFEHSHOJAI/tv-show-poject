@@ -16,11 +16,7 @@ img{
     display: flex;
     justify-content: center;
 }
-p{
-    display: block;
-    
-   background-color: red;
-}
+
 .continer-header{
     display: flex;
     flex-wrap: wrap;
@@ -30,4 +26,8 @@ p{
 .continer-header #serch{
     margin-left: 10%;
     display: flex;
+}
+
+ option{
+    width: 10%;
 }

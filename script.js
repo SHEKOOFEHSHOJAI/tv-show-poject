@@ -1,18 +1,15 @@
-
-const continer=document.querySelector("#container")
+const continer = document.querySelector("#container");
 const moviSelect = document.querySelector("#movi-select");
 
-
-
-fetch("./script.json").then((res) =>  res.json())
-.then((ar)=>{
-    
-    ar.forEach(element => {
+fetch("./script.json")
+  .then((res) => res.json())
+  .then((ar) => {
+    ar.forEach((element) => {
       //div
       let div = document.createElement("div");
       div.style.boxShadow = "12px 4px 13px 1px rgba(0, 0, 255, .2)";
       div.style.width = "30%";
-      
+
       div.style.marginTop = "20px";
       div.style.overflow = "hidden";
 
@@ -20,43 +17,132 @@ fetch("./script.json").then((res) =>  res.json())
 
       let img = document.createElement("img");
       img.src = element.image.medium;
-      console.log(img);
+      
 
       // name ,season,number
-      let nam = (document.createElement("p").textContent = element.name);
-      let p = (document.createElement(
-        "p"
-      ).textContent = `0${element.season}_0${element.number}`);
+
+      let nam = document.createElement("h6");
+      nam.textContent = element.name;
+
+      const season = element.season;
+      let number = element.number;
+      let nu = `${number}`;
+      let st = `${season}`;
+
+      if (st < 10) {
+        st = `0${season}`;
+      }
+      if (nu < 10) {
+        nu = `0${number}`;
+      }
+     //shomar fasl
+      let p = document.createElement("h5")
+      p.textContent = `S${st}_E${nu}`;
+      // .textContent =`S${st}_E${nu}`;
 
       //url
-      console.log(element.url);
+
       let ohg = element.url;
       let url = document.createElement("a");
       url.textContent = "move information";
       url.setAttribute("href", ohg);
-      // let article=document.createElement("article").textContent=`${url}`
-      // url.href = element.url;
 
-      //summery.textContent=`jjjjjjjj${o}`
-      let summery = (document.createElement(
-        "section"
-      ).innerHTML = `${element.summary}`);
+      //summery
+      let summery = document.createElement("p" ) 
+       summery.innerHTML=`${element.summary}`
+      // .innerHTML = `${element.summary}`);
+       
+     
 
-      // div.style.backgroundColor="green";
-      div.append(img, nam, p, url, summery);
+      //append
+
+      div.append(img, nam, p, summery, url);
 
       continer.append(div);
 
       //selection
 
+      // let title = ` <option value="${element.name}-S${st}E${nu}">
+      //     ${element.name}-S${st}E${nu}
+      //   </option>`;
+     
+      // select.innerHTML += title;
+
       const option = document.createElement("option");
-      option.textContent = `${element.name}-S${element.season}E ${element.number}`;
-      
+      option.textContent = `${element.name}-S${st}E${nu}`;
+      option.value = `${element.name}-S${st}E${nu}`;
+      option
+      // console.log(option);
+
       //${element.name}+${element.season} +${element.number}
-      moviSelect.append(option);
+      return moviSelect.append(option);
     });
+  });
+
+////////input
+
+
+//serch
+const serchInput = document.querySelector("#serch");
+
+serchInput.addEventListener("keyup", (e) => {
+  //value input
+  const showValue = e.target.value;
+  //all div
+  const allDiv = document.querySelectorAll("div");
+  //itrate to all div
+
+  for (const iterator of allDiv) {
+    console.log(iterator);
+    //name apison
+    const viowShow = iterator.querySelector("h6").textContent;
+    console.log(viowShow);
+   // if name apison !inclues inputvalue
+    if (!viowShow.includes(showValue)) {
+      iterator.style.display = "none";
+    } else {
+      iterator.style.display = "initial";
+    }
+  }
+
+
+
+  ///////////کد نوع دوم
+
+
+});
+
+// serch select
+//shomreh fasl
+const option = document.getElementsByTagName("option");
+console.log(option);
+const select = document.getElementById("movi-select");
+
+select.addEventListener("change",(e)=>{
+
+  // console.log("okkkkkkkkk");
+  for (const iterator of option) {
+    //parent is select
+    // console.log(iterator);
+     
+
+     if (!viowShow.includes(showValue)) {
+       iterator.style.display = "none";
+     } else {
+       iterator.style.display = "initial";
+     }
+    //  iterator.parentElement.style.display=""; 
+
+    //  if (e.target.value !=="all") {
+    //       if (e.target.value !== iterator.textContent.slice(5)) {
+    //         // console.log(op);
+    //         // iterator.parentElement.style.display="block"
+
+    //       }
+
+    //    }
+  }
 })
+
+
 // .catch((err)=>console.log(err))
- 
-
-
