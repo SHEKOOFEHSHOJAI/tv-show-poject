@@ -1,5 +1,6 @@
 
 const continer=document.querySelector("#container")
+const moviSelect = document.querySelector("#movi-select");
 
 
 
@@ -7,38 +8,55 @@ fetch("./script.json").then((res) =>  res.json())
 .then((ar)=>{
     
     ar.forEach(element => {
+      //div
+      let div = document.createElement("div");
+      div.style.boxShadow = "12px 4px 13px 1px rgba(0, 0, 255, .2)";
+      div.style.width = "30%";
+      
+      div.style.marginTop = "20px";
+      div.style.overflow = "hidden";
 
-    //    console.log(element);
-       let div= document.createElement("div")
-       
-        let img=document.createElement("img")
-         img.src = element.image.medium;
-         console.log(img);
-        div.style.boxShadow = "12px 12px 2px 1px rgba(0, 0, 255, .2)";
-         div.style.width="30%"
-         div.style.height = "100%";
-         div.style.marginTop="20px"
-        
-        let nam=document.createElement('p').textContent=element.name
-         let p = (document.createElement("p").textContent = `0${element.season}_0${element.number}`);
-         
-           let url = document.createElement("a");
-          url.href = element.url;
-        // let summery = (document.createElement( "section").textContent = `${element.summary}`);
-          console.log(url);
-         
-        
-           
+      //img
 
-         p.display="inline-block"
-        // div.style.backgroundColor="green";
-        div.append(img, nam, p,url);
-       
-        continer.append(div)
-        
-        
+      let img = document.createElement("img");
+      img.src = element.image.medium;
+      console.log(img);
+
+      // name ,season,number
+      let nam = (document.createElement("p").textContent = element.name);
+      let p = (document.createElement(
+        "p"
+      ).textContent = `0${element.season}_0${element.number}`);
+
+      //url
+      console.log(element.url);
+      let ohg = element.url;
+      let url = document.createElement("a");
+      url.textContent = "move information";
+      url.setAttribute("href", ohg);
+      // let article=document.createElement("article").textContent=`${url}`
+      // url.href = element.url;
+
+      //summery.textContent=`jjjjjjjj${o}`
+      let summery = (document.createElement(
+        "section"
+      ).innerHTML = `${element.summary}`);
+
+      // div.style.backgroundColor="green";
+      div.append(img, nam, p, url, summery);
+
+      continer.append(div);
+
+      //selection
+
+      const option = document.createElement("option");
+      option.textContent = `${element.name}-S${element.season}E ${element.number}`;
+      
+      //${element.name}+${element.season} +${element.number}
+      moviSelect.append(option);
     });
-}).catch((err)=>console.log(err))
+})
+// .catch((err)=>console.log(err))
  
 
 
