@@ -9,7 +9,7 @@ fetch("./script.json")
       let div = document.createElement("div");
       div.style.boxShadow = "12px 4px 13px 1px rgba(0, 0, 255, .2)";
       div.style.width = "30%";
-
+       
       div.style.marginTop = "20px";
       div.style.overflow = "hidden";
 
@@ -62,11 +62,7 @@ fetch("./script.json")
 
       //selection
 
-      // let title = ` <option value="${element.name}-S${st}E${nu}">
-      //     ${element.name}-S${st}E${nu}
-      //   </option>`;
-     
-      // select.innerHTML += title;
+      
 
       const option = document.createElement("option");
       option.textContent = `${element.name}-S${st}E${nu}`;
@@ -90,13 +86,14 @@ serchInput.addEventListener("keyup", (e) => {
   const showValue = e.target.value;
   //all div
   const allDiv = document.querySelectorAll("div");
+  
   //itrate to all div
 
   for (const iterator of allDiv) {
     console.log(iterator);
     //name apison
     const viowShow = iterator.querySelector("h6").textContent;
-    console.log(viowShow);
+    // console.log(viowShow);
    // if name apison !inclues inputvalue
     if (!viowShow.includes(showValue)) {
       iterator.style.display = "none";
@@ -115,33 +112,35 @@ serchInput.addEventListener("keyup", (e) => {
 // serch select
 //shomreh fasl
 const option = document.getElementsByTagName("option");
-console.log(option);
+// console.log(option);
 const select = document.getElementById("movi-select");
 
 select.addEventListener("change",(e)=>{
 
-  // console.log("okkkkkkkkk");
+ 
   for (const iterator of option) {
     //parent is select
-    // console.log(iterator);
+    console.log(e.target.value);
+      const allDiv = document.querySelectorAll("div");
      
 
-     if (!viowShow.includes(showValue)) {
-       iterator.style.display = "none";
-     } else {
-       iterator.style.display = "initial";
-     }
-    //  iterator.parentElement.style.display=""; 
+    for (const diva of allDiv) {
+      //  console.log(diva.textContent.slice(5));
+    
+       diva.style.display = "block";
 
-    //  if (e.target.value !=="all") {
-    //       if (e.target.value !== iterator.textContent.slice(5)) {
-    //         // console.log(op);
-    //         // iterator.parentElement.style.display="block"
-
-    //       }
-
-    //    }
-  }
+       if (e.target.value !== "all") {
+         if (e.target.value !== diva.textContent) {
+           // console.log(op);
+           diva.style.display = "none";
+           console.log("nooooooooooooooooo");
+         }
+         
+       }
+      //  console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+    }
+    
+ }
 })
 
 
